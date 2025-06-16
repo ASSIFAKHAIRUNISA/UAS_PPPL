@@ -116,7 +116,7 @@ public class StepDef {
             // Jika masih di halaman verifikasi tapi ada pesan sukses
             if (driver.getCurrentUrl().contains("/verify_account")) {
                 System.out.println("Verifikasi sukses tapi tidak redirect. Membuka manual...");
-                driver.get("http://localhost:3000/login"); // Ganti dengan URL login frontend
+                driver.get("http://localhost:3000/login");
             }
         } catch (TimeoutException e) {
             // Debugging detail
@@ -218,7 +218,7 @@ public class StepDef {
 
     @When("User clicks on the product {string}")
     public void userClicksOnTheProduct(String productName) {
-    detailProdukPage = new DetailProdukPage(driver); // <-- penting!
+    detailProdukPage = new DetailProdukPage(driver);
     detailProdukPage.clickProdukRerum();
     }
 
