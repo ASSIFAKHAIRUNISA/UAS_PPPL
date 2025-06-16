@@ -8,47 +8,17 @@ public class DashboardPage extends BasePage {
         super(driver);
     }
 
-    // Multiple locator strategies for better reliability
     private final By searchInput = By.id("search");
-    private final By searchInputAlt = By.xpath("//input[@type='text' and (@id='search' or @placeholder='Search' or contains(@class, 'search'))]");
-
     private final By searchButton = By.xpath("//button[@type='submit']");
-    private final By searchButtonAlt = By.xpath("//button[contains(text(), 'Search') or contains(@class, 'search')]");
-
-    // Multiple strategies for "no product found" message
     private final By noProductFoundMessage = By.xpath("//div[text()='Produk tidak ditemukan']");
-    private final By noProductFoundMessageAlt = By.xpath("//*[contains(text(), 'Produk tidak ditemukan') or contains(text(), 'tidak ditemukan') or contains(text(), 'No products found')]");
-
-    // Multiple strategies for search results
     private final By searchResultsContainer = By.xpath("//div[contains(@class, 'flex-row') and contains(@class, 'flex-wrap')]");
-    private final By searchResultsContainerAlt = By.xpath("//div[contains(@class, 'product') or contains(@class, 'result') or contains(@class, 'item')]");
-    private final By anyProductResult = By.xpath("//div[contains(@class, 'flex-row')]//p[contains(@class, 'text-sm')]");
-
     public void searchForProduct(String productName) {
-        // Try primary locator first, then fallback
-        try {
-            type(searchInput, productName);
-        } catch (Exception e) {
-            System.out.println("Primary search input not found, trying alternative...");
-            type(searchInputAlt, productName);
-        }
+        type(searchInput, productName);
     }
 
     public void clickSearch() {
-        // Try primary search button, then fallback
-        try {
-            click(searchButton);
-        } catch (Exception e) {
-            System.out.println("Primary search button not found, trying alternative...");
-            click(searchButtonAlt);
-        }
-
-        // Wait a moment for search results to load
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        click(searchButton);
+        waitForPageLoad();
     }
 
     public boolean isNoProductFoundMessageDisplayed() {
@@ -59,18 +29,12 @@ public class DashboardPage extends BasePage {
             Thread.currentThread().interrupt();
         }
 
-        // Try multiple strategies to find the "no product found" message
         if (isElementVisible(noProductFoundMessage)) {
             System.out.println("Found 'no product found' message using primary locator");
             return true;
         }
 
-        if (isElementVisible(noProductFoundMessageAlt)) {
-            System.out.println("Found 'no product found' message using alternative locator");
-            return true;
-        }
 
-        // Check if page source contains the text
         String pageSource = driver.getPageSource();
         if (pageSource.contains("Produk tidak ditemukan") ||
                 pageSource.contains("tidak ditemukan") ||
@@ -84,28 +48,14 @@ public class DashboardPage extends BasePage {
     }
 
     public boolean areSearchResultsDisplayed() {
-        // Wait a bit for results to load
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        // First check if there are any product results
-        if (isElementVisible(anyProductResult)) {
-            System.out.println("Found product results using specific product locator");
-            return true;
-        }
-
-        // Try primary container
         if (isElementVisible(searchResultsContainer)) {
             System.out.println("Found search results container using primary locator");
-            return true;
-        }
-
-        // Try alternative container
-        if (isElementVisible(searchResultsContainerAlt)) {
-            System.out.println("Found search results container using alternative locator");
             return true;
         }
 
@@ -140,21 +90,10 @@ public class DashboardPage extends BasePage {
     }
 
     public boolean isDashboardLoaded() {
-        // Wait for page to fully load
         waitForPageLoad();
 
-        // Multiple strategies to verify dashboard is loaded
-        System.out.println("Checking if dashboard is loaded...");
-
-        // Strategy 1: Check for search input
         if (isElementVisible(searchInput)) {
             System.out.println("Dashboard loaded - found search input (primary)");
-            return true;
-        }
-
-        // Strategy 2: Alternative search input
-        if (isElementVisible(searchInputAlt)) {
-            System.out.println("Dashboard loaded - found search input (alternative)");
             return true;
         }
 

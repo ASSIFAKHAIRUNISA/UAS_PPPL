@@ -1,6 +1,6 @@
 Feature: Account Registration and Verification
 
-Scenario: User registers and verifies account
+Scenario: User registers, verifies account, login, search, detail, checkout
 # Registrasi (Assifa)
   Given User is on the registration page
   When User inputs valid registration data

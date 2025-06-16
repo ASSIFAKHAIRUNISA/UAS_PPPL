@@ -52,8 +52,8 @@ public class StepDef {
                 "assifa@example.com",
                 "Test1234!",
                 "Test1234!",
-                "revandratest",
-                "Revandra"
+                "assifa",
+                "khairu"
         );
     }
 
