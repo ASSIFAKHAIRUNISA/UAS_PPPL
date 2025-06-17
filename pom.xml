@@ -4,82 +4,43 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>UAS_PPPL</artifactId>
+    <groupId>com.refindspppl</groupId>
+    <artifactId>refindspppl</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source> <!-- Gunakan Java 17 -->
+        <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!-- Dependency untuk Selenium WebDriver dan Cucumber -->
     <dependencies>
-        <!-- JUnit 5 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.11.0-M1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Selenium -->
+        <!-- Selenium Java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.19.1</version>
+            <version>4.21.0</version>
         </dependency>
-
-        <!-- Cucumber (semua versi 7.18.0) -->
+        <!-- Cucumber Java -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.18.0</version>
+            <version>7.15.0</version>
         </dependency>
-
+        <!-- Cucumber JUnit -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.18.0</version>
+            <version>7.15.0</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- (Optional tapi direkomendasikan) Plugin JUnit Platform untuk Cucumber -->
+        <!-- JUnit -->
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit-platform-engine</artifactId>
-            <version>7.18.0</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- WebDriverManager (opsional untuk otomatisasi driver) -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.8.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20230227</version>
-        </dependency>
-
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- Plugin Surefire untuk menjalankan test -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <includes>
-                        <include>**/Runner.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
